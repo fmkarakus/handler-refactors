@@ -42,15 +42,16 @@
           throw new TypeError("arr is not an array of strings");
         }
 
+        const alreadySaved = arr.includes(newEntry);
+        if (!alreadySaved && newEntry !== undefined) {
+          arr.push(newEntry);
+        }
+
         const newArr = [];
         for (let el of arr) {
           newArr.push(el);
         }
 
-        const alreadySaved = newArr.includes(newEntry);
-        if (!alreadySaved) {
-          newArr.push(newEntry);
-        }
         return newArr;
       };
 
@@ -110,12 +111,10 @@
         const userInput = prompt("enter a string to save");
 
         // execute core logic
-        const alreadySaved = noCopies.includes(userInput);
-        if (!alreadySaved) {
-          noCopies.push(userInput);
-        }
+        const result = saveNoCopies(noCopies, userInput);
+
         // communicate result to user
-        const message = noCopies.toString();
+        const message = result.toString();
         alert(message);
       };
     </script>
